@@ -18,26 +18,23 @@ movie_dataset = read_movie_data('dataset.csv')
 def recommend_movies(user_profile, movies):
     liked_movies = user_profile['liked_movies']
     recommended_movies = []
-    max_match_count = 0
 
     for movie in movies:
-        match_count = 0
 
-        if movie['title'] not in liked_movies:  # Exclude movies already liked by the user
-            if movie['genre'] == user_profile['preferred_genre']:
-                match_count += 1
-            if any(actor in user_profile['favorite_actors'] for actor in movie['actors']):
-                match_count += 1
-            if movie['title'] in user_profile['liked_movies']:
-                match_count += 1
-            if float(movie['rating']) >= user_profile['min_rating']:
-                match_count += 1
+        if movie['title'] not in liked_movies:
 
-            if match_count > max_match_count:
-                max_match_count = match_count
-                recommended_movies = [movie['title']]
-            elif match_count == max_match_count and match_count > 0:
+           	if movie['genre'] == user_profile['preferred_genre'] and float(movie['rating']) >= user_profile['min_rating'] and any(actor in user_profile['favorite_actors'] for actor in movie['actors']):
                 recommended_movies.append(movie['title'])
+                continue
+            elif any(actor in user_profile['favorite_actors'] for actor in movie['actors']) and movie['genre'] == user_profile['preferred_genre']:
+                recommended_movies.append(movie['title'])
+                continue
+            elif float(movie['rating']) >= user_profile['min_rating'] and any(actor in user_profile['favorite_actors'] for actor in movie['actors']):
+                recommended_movies.append(movie['title'])
+                continue
+            elif float(movie['rating']) >= user_profile['min_rating'] and movie['genre'] == user_profile['preferred_genre']:
+            	recommended_movies.append(movie['title'])
+            	continue
 
     return recommended_movies
 
@@ -50,7 +47,8 @@ def get_user_profile():
     }
 
     recommendations = recommend_movies(user_profile, movie_dataset)
-    recommended_movies_label.config(text=f"Recommended Movies: {', '.join(recommendations)}")
+    recommended_movies_label.config(text="Recommended Movies:\n" + "\n".join(recommendations))
+
 
 root = tk.Tk()
 root.title("MovieMinds: Your Favorite Recommendation System")
