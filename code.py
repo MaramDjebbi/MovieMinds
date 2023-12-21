@@ -67,30 +67,32 @@ canvas = tk.Canvas(root, width=root.winfo_screenwidth(), height=root.winfo_scree
 canvas.pack(fill="both", expand=True)
 canvas.create_image(0, 0, image=bg_photo, anchor="nw")
 
-# Labels, Entry Fields, Buttons, and other elements...
-tk.Label(root, text="Your Liked Movies (Comma-separated):").pack()
-liked_movies_entry = tk.Entry(root)
-liked_movies_entry.pack()
+# Labels, Entry Fields, Buttons, and other elements on the canvas...
+label1 = tk.Label(canvas, text="Your Liked Movies (Comma-separated):")
+label1.place(x=320 , y=10)
+liked_movies_entry = tk.Entry(canvas)
+liked_movies_entry.place(x=365 , y=40)
 
-tk.Label(root, text="Your Preferred Genre:").pack()
-preferred_genre_entry = tk.Entry(root)
-preferred_genre_entry.pack()
+label2 = tk.Label(canvas, text="Your Preferred Genre:")
+label2.place(x=372 , y=70)
+preferred_genre_entry = tk.Entry(canvas)
+preferred_genre_entry.place(x=365 , y=100)
 
-tk.Label(root, text="Your Favorite Actors (Comma-separated):").pack()
-favorite_actors_entry = tk.Entry(root)
-favorite_actors_entry.pack()
+label3 = tk.Label(canvas, text="Your Favorite Actors (Comma-separated):")
+label3.place(x=310 , y=130)
+favorite_actors_entry = tk.Entry(canvas)
+favorite_actors_entry.place(x=365 , y=160)
 
-tk.Label(root, text="Minimum Movie Rating:").pack()
-min_rating_entry = tk.Entry(root)
-min_rating_entry.pack()
+label4 = tk.Label(canvas, text="Minimum Movie Rating:")
+label4.place(x=372 , y=190)
+min_rating_entry = tk.Entry(canvas)
+min_rating_entry.place(x=365 , y=220)
 
-# Button to generate recommendations
-generate_button = tk.Button(root, text="Generate Recommendations", command=get_user_profile)
-generate_button.pack()
+generate_button = tk.Button(canvas, text="Generate Recommendations", command=get_user_profile)
+generate_button.place(x=340 , y=255)
 
-# Label to display recommendations
-recommended_movies_label = tk.Label(root, text="")
-recommended_movies_label.pack()
+recommended_movies_label = tk.Label(canvas, text="")
+recommended_movies_label.place(x=400 , y=280)
 
 root.mainloop()
 
